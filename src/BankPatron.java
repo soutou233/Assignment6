@@ -64,4 +64,44 @@ public class BankPatron {
             return false;
         }
     }
+
+    public boolean withdraw(double amount, int i){
+        BankAccount account = getAccount(i);
+        if (account.withdraw(amount) && amount != 0){
+            cashOnHand += amount;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean addAccount(double rate, AccountType accountType){
+        if (firstAccount == null){
+            firstAccount = new BankAccount(firstName, lastName, rate, accountType);
+            return true;
+        }
+        else if (secondAccount == null){
+            secondAccount = new BankAccount(firstName, lastName, rate, accountType);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean removeAccount(int i){
+        BankAccount account = getAccount(i);
+        if (account == firstAccount && account != null){
+            firstAccount = null;
+            return true;
+        }
+        else if (account == secondAccount && secondAccount != null){
+            secondAccount = null;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
