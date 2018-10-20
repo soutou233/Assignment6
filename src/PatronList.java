@@ -61,7 +61,7 @@ public class PatronList {
         }
     }
 
-    public BankPatron getPatronFullName(String fullName){ //how about for loop?
+    public BankPatron getPatronFullName(String fullName){
         if (patron1.getFullName().equalsIgnoreCase(fullName)){
             return patron1;
         }
@@ -102,7 +102,28 @@ public class PatronList {
     }
 
     public String patronInfo(){
-
+        String patronInfo = "";
+        String space = " ";
+        String balance = " Balance: ";
+        String rate = " Interest Rate: ";
+        for (int i =0; i <=5; i++){
+            BankPatron patron = getPatron(i);
+            if (patron != null){
+                patronInfo += space + patron.getFullName();
+            }
+            BankAccount account = patron.getAccount(1);
+            if (account != null){
+                patronInfo += (space + account.getType() + space + account.getAccountNum() + balance + account.checkBalance() + rate + account.getRate() + ".\n");
+            }
+            account = patron.getAccount(2);
+            if (account != null){
+                patronInfo += (space + account.getType() + space + account.getAccountNum() + balance + account.checkBalance() + rate + account.getRate() + ".\n");
+            }
+            if (patronInfo.equalsIgnoreCase("")){
+                return "None";
+            }
+        }
+        return patronInfo;
     }
 
 }
